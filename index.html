@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortune Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('parchment.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .fortune-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .fortune-box h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: white;
+            border: 2px solid black;
+            color: black;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #f1f1f1;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .result {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            text-align: left;
+            padding: 20px;
+            width: 80%;
+            margin: auto;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .result h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .small {
+            font-size: 15px;
+        }
+
+        .details {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .date {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="fortune-box">
+            <h1>Text your fortune today</h1>
+            <button id="testButton">Test Now</button>
+        </div>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("testButton").addEventListener("click", function() {
+            const fortuneResult = getFortune();
+            displayResult(fortuneResult);
+        });
+
+        function getFortune() {
+            const fortunes = [
+                {
+                    title: "Great Blessing (大吉)",
+                    color: "red",
+                    details: [
+                        { text: "Buying lottery tickets:", explanation: "Won a lot of money" },
+                        { text: "Exam:", explanation: "Free pass, Level 4++" },
+                        { text: "Shopping:", explanation: "50% off everything" },
+                        { text: "Solving problems:", explanation: "Significantly improved skills" }
+                    ]
+                },
+                {
+                    title: "Middle Blessing (中吉)",
+                    color: "red",
+                    details: [
+                        { text: "Exam:", explanation: "Definitely aced it" },
+                        { text: "Reading web novels:", explanation: "Author suddenly updates 10 chapters" },
+                        { text: "Listening to music:", explanation: "Instantly finds the perfect track" },
+                        { text: "Class:", explanation: "Learns quickly, all answers correct" }
+                    ]
+                },
+                {
+                    title: "Small Blessing (小吉)",
+                    color: "red",
+                    details: [
+                        { text: "Playing rhythm games:", explanation: "Full combo" },
+                        { text: "Solving problems:", explanation: "Accuracy improved" },
+                        { text: "Practicing MO:", explanation: "Solved a tough problem" },
+                        { text: "Playing Brawl Stars:", explanation: "Won three consecutive matches" }
+                    ]
+                },
+                {
+                    title: "Peace (平)",
+                    color: "green",
+                    details: [
+                        { text: "Playing Innocent:", explanation: "Be careful not to get exposed" },
+                        { text: "Playing claw machine:", explanation: "Took 15 tries to win" },
+                        { text: "Writing an essay:", explanation: "Can’t come up with a strong thesis" },
+                        { text: "Staying up late:", explanation: "Guaranteed to not wake up the next day" }
+                    ]
+                },
+                {
+                    title: "Small Misfortune (小凶)",
+                    color: "black",
+                    details: [
+                        { text: "Drinking water:", explanation: "Coughing several times" },
+                        { text: "Exam:", explanation: "Didn’t finish writing" },
+                        { text: "Debugging code:", explanation: "The more I fix, the messier it gets" },
+                        { text: "Watching anime:", explanation: "No progress in the storyline" }
+                    ]
+                },
+                {
+                    title: "Middle Misfortune (中凶)",
+                    color: "black",
+                    details: [
+                        { text: "Gacha pull:", explanation: "Guaranteed to hit the pity rate" },
+                        { text: "Playing <i>The Embodiment of Scarlet Devil</i>:", explanation: "Killed by Flandre Scarlet" },
+                        { text: "After school:", explanation: "Slipped on the way home" },
+                        { text: "Weighing myself:", explanation: "Gained another 1kg" }
+                    ]
+                },
+                {
+                    title: "Great Misfortune (大凶)",
+                    color: "black",
+                    details: [
+                        { text: "Going to school:", explanation: "Late and forced to stand" },
+                        { text: "Going to the supermarket:", explanation: "The snack I wanted is sold out" },
+                        { text: "Playing Clash Royale:", explanation: "Lost by 1 HP" },
+                        { text: "Running Visual Studio:", explanation: "The computer crashes suddenly" }
+                    ]
+                }
+            ];
+
+            const randomIndex = Math.floor(Math.random() * fortunes.length);
+            return fortunes[randomIndex];
+        }
+
+        function displayResult(fortuneResult) {
+            const resultDiv = document.getElementById("result");
+            const fortuneBox = document.querySelector(".fortune-box");
+            fortuneBox.style.display = "none";
+            resultDiv.style.display = "block";
+
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.toLocaleString('en', { month: 'short' })}.${currentDate.getDate()}, ${currentDate.getFullYear()}`;
+
+            resultDiv.innerHTML = `<div class="date">Your fortune for ${formattedDate} is:</div><h2 style="color: ${fortuneResult.color};">${fortuneResult.title}</h2>`;
+
+            fortuneResult.details.forEach(detail => {
+                resultDiv.innerHTML += `<div class="details"><span style="font-size: 30px;">${detail.text}</span><br><span class="small">${detail.explanation}</span></div>`;
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+<!-- 
+    Worship Solstice 10 times in your heart, faithfully, before you test 
+    to ensure your good fortune today. Trust me, your destiny depends on it.
+    If the luck’s bad... well, blame the algorithm, not me. 
+    Proceed at your own risk. 
+-->
